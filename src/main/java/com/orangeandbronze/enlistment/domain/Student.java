@@ -49,11 +49,12 @@ public class Student {
 		return true;
 	}
 
-	public void enlist(Section sectionToBeEnlisted) throws ConflictInSectionEnlistmentException{
+	public StudentSemEnlistments enlist(Section sectionToBeEnlisted) throws ConflictInSectionEnlistmentException{
 		checkIffPreviouslyEnlisted(sectionToBeEnlisted);
 		checkIfAPreviouslyEnlistedSectionIsInConflictWith(sectionToBeEnlisted);
-		enlistedSections.add(sectionToBeEnlisted);
 		sectionToBeEnlisted.enlist(this);
+		enlistedSections.add(sectionToBeEnlisted);
+		return new StudentSemEnlistments(this, new Semester());
 	}
 
 	private void checkIffPreviouslyEnlisted(Section section) {

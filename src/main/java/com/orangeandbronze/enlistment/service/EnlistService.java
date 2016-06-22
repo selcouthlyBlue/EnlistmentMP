@@ -9,8 +9,12 @@ public class EnlistService {
 	private StudentDAO studentDao;
 	private StudentSemEnlistmentsDAO studentSemEnlistmentsDao;
 	
-	public void enlist(int studentNo, String sectionId) {
-		// TODO: Implement this method
+	public StudentSemEnlistments enlist(int studentNo, String sectionId) {
+		Student student = studentDao.findBy(studentNo);
+		Section section = sectionDao.findBy(sectionId);
+		StudentSemEnlistments studentSemEnlistment = student.enlist(section);
+		studentSemEnlistmentsDao.update(studentSemEnlistment);
+		return studentSemEnlistment;
 	}
 
 	public void setSectionDao(SectionDAO sectionDao) {

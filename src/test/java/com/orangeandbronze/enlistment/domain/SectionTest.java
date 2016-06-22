@@ -6,16 +6,17 @@ import org.junit.Test;
 
 public class SectionTest {
 	
-	private Section generateSectionWithValidScheduleAndRoom(String sectionID){
+	private Section generateSectionWithValidScheduleRoomAndSubject(String sectionID){
 		Schedule schedule = new Schedule(Days.MTH, Period.FIRSTPERIOD);
-		return new Section(sectionID, schedule, Room.GAB207);
+		Subject subject = new Subject("ML100");
+		return new Section(sectionID, schedule, Room.GAB207, subject);
 	}
 
 	@Test
 	public void sectionWithSectionIDContainingOnlyAlphanumericCharacters() 
 			throws Exception{
 		try {
-			generateSectionWithValidScheduleAndRoom("MEH1");
+			generateSectionWithValidScheduleRoomAndSubject("MEH1");
 		} catch (IllegalArgumentException expected) {
 			fail("Instantiating a Section object should not throw "
 					+ "an exception if the sectionID passed "
@@ -26,7 +27,7 @@ public class SectionTest {
 	@Test
 	public void newSectionWithNullSectionIDRaisesAnException() throws Exception {
 		try {
-			generateSectionWithValidScheduleAndRoom(null);
+			generateSectionWithValidScheduleRoomAndSubject(null);
 			fail("Instantiating a Section object should throw "
 					+ "an exception if the sectionID passed "
 					+ "is null.");
@@ -38,7 +39,7 @@ public class SectionTest {
 	@Test
 	public void sectionWithBlankStudentIDRaisesAnException() throws Exception {
 		try {
-			generateSectionWithValidScheduleAndRoom("");
+			generateSectionWithValidScheduleRoomAndSubject("");
 			fail("Instantiating a Section object should throw "
 					+ "an exception if the sectionID passed "
 					+ "is blank.");
@@ -51,7 +52,7 @@ public class SectionTest {
 	public void sectionWithSectionIDContainingANonAlphanumericCharacterRaisesAnException() 
 			throws Exception {
 		try {
-			generateSectionWithValidScheduleAndRoom("$#!+");
+			generateSectionWithValidScheduleRoomAndSubject("$#!+");
 			fail("Instantiating a Section object should throw "
 					+ "an exception if the sectionID passed "
 					+ "contains a nonalphanumeric character.");

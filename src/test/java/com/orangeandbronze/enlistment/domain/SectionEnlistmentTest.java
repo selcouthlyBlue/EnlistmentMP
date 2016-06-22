@@ -10,12 +10,14 @@ public class SectionEnlistmentTest {
 	private Student student;
 	private Section section;
 	private Schedule schedule;
+	private Subject subject;
 	
 	@Before
 	public void setUp() {
 		student = new Student(12345);
 		schedule = new Schedule(Days.MTH, Period.FIRSTPERIOD);
-		section = new Section("MEH1", schedule, Room.RH300);
+		subject = new Subject("ML100");
+		section = new Section("MEH1", schedule, Room.RH300, subject);
 	}
 	
 	@Test
@@ -49,7 +51,7 @@ public class SectionEnlistmentTest {
 	
 	@Test
 	public void enlistingInASectionInConflictAnyOfThePreviouslyEnlistedSections() throws Exception {
-		Section sectionWithConflictingSchedule = new Section("MEH3", schedule, Room.GAB207);
+		Section sectionWithConflictingSchedule = new Section("MEH3", schedule, Room.GAB207, new Subject("CMSC142"));
 		student.enlist(section);
 		try {
 			student.enlist(sectionWithConflictingSchedule);
@@ -76,5 +78,4 @@ public class SectionEnlistmentTest {
 			
 		}
 	}
-
 }

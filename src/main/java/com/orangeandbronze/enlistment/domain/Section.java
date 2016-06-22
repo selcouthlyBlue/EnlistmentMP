@@ -9,13 +9,16 @@ public class Section {
 	private Collection<Student> enlistedStudents;
 	private final Schedule schedule;
 	private Room room;
-	
-	public Section(String sectionID, Schedule schedule, Room room) {
+	private final Subject subject;
+
+	public Section(String sectionID, Schedule schedule, Room room, Subject subject) {
 		checkIfValid(sectionID);
+		checkIfNull(subject);
 		this.sectionID = sectionID;
 		this.enlistedStudents = new HashSet<Student>();
 		this.schedule = schedule;
 		this.room = room;
+		this.subject = subject;
 	}
 
 	private void checkIfValid(String sectionID) {
@@ -50,6 +53,13 @@ public class Section {
 		return enlistedStudents.contains(student);
 	}
 
+	private void checkIfNull(Subject subject) {
+		if(subject == null){
+			throw new IllegalArgumentException("Argument 'subject' "
+					+ "should not be null.");
+		}
+	}
+
 	public int getNumberOfEnlistedStudents() {
 		return enlistedStudents.size();
 	}
@@ -66,6 +76,10 @@ public class Section {
 		}
 	}
 
+	public boolean hasSameScheduleAs(Section sectionToBeEnlisted) {
+		return this.schedule.equals(sectionToBeEnlisted.schedule);
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if(this == obj)
@@ -79,9 +93,13 @@ public class Section {
 			return false;
 		return true;
 	}
-
-	public boolean hasSameScheduleAs(Section sectionToBeEnlisted) {
-		return this.schedule.equals(sectionToBeEnlisted.schedule);
-	}
+	
+	@Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + sectionID.hashCode();
+        return result;
+    }
 
 }
