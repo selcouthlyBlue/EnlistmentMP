@@ -1,6 +1,6 @@
 package com.orangeandbronze.enlistment.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -11,9 +11,7 @@ import org.junit.Test;
 import com.orangeandbronze.enlistment.dao.SectionDAO;
 import com.orangeandbronze.enlistment.dao.StudentDAO;
 import com.orangeandbronze.enlistment.dao.StudentSemEnlistmentsDAO;
-import com.orangeandbronze.enlistment.domain.ConflictInSectionEnlistmentException;
 import com.orangeandbronze.enlistment.domain.Days;
-import com.orangeandbronze.enlistment.domain.EnlistmentException;
 import com.orangeandbronze.enlistment.domain.Period;
 import com.orangeandbronze.enlistment.domain.Room;
 import com.orangeandbronze.enlistment.domain.Schedule;
