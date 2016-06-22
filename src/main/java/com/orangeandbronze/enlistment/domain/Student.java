@@ -22,39 +22,24 @@ public class Student {
 		}
 	}
 	
-	@Override
-	public String toString() {
-		return "Student# " + studentNumber;
-	}
-	
-	@Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + studentNumber;
-        return result;
-    }
-	
-	@Override
-	public boolean equals(Object obj) {
-		if(this == obj)
-			return true;
-		if(obj == null)
-			return false;
-		if(!(obj instanceof Student))
-			return false;
-		Student otherStudent = (Student) obj;
-		if(this.studentNumber != otherStudent.studentNumber)
-			return false;
-		return true;
-	}
-
 	public StudentSemEnlistments enlist(Section sectionToBeEnlisted) throws ConflictInSectionEnlistmentException{
 		checkIffPreviouslyEnlisted(sectionToBeEnlisted);
 		checkIfAPreviouslyEnlistedSectionIsInConflictWith(sectionToBeEnlisted);
+		checkIfAPreviouslyEnlistedSectionForTheCurrentSemesterHasTheSameSubjectAs(sectionToBeEnlisted);
 		sectionToBeEnlisted.enlist(this);
 		enlistedSections.add(sectionToBeEnlisted);
 		return new StudentSemEnlistments(this, new Semester());
+	}
+
+	private void checkIfAPreviouslyEnlistedSectionForTheCurrentSemesterHasTheSameSubjectAs(
+			Section sectionToBeEnlisted) {
+		for(Section section : enlistedSections){
+			if(section.hasSameSubjectInSameSemesterAs(sectionToBeEnlisted)){
+				throw new EnlistmentException("Section " + sectionToBeEnlisted
+						+ " has the same subject as that of one of the "
+						+ "previously enlisted sections: " + section);
+			}
+		}
 	}
 
 	private void checkIffPreviouslyEnlisted(Section section) {
@@ -71,6 +56,33 @@ public class Student {
 						+ " is in conflict with " + section);
 			}
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "Student# " + studentNumber;
+	}
+
+	@Override
+	public int hashCode() {
+	    final int prime = 31;
+	    int result = 1;
+	    result = prime * result + studentNumber;
+	    return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj)
+			return true;
+		if(obj == null)
+			return false;
+		if(!(obj instanceof Student))
+			return false;
+		Student otherStudent = (Student) obj;
+		if(this.studentNumber != otherStudent.studentNumber)
+			return false;
+		return true;
 	}
 
 }

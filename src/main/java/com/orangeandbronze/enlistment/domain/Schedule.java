@@ -24,4 +24,13 @@ public class Schedule {
 			return false;
 		return true;
 	}
+	
+	@Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((days == null) ? 0 : days.hashCode());
+        result = prime * result + ((period == null) ? 0 : period.hashCode());
+        return result;
+    }
 }

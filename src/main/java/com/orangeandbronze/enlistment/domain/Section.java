@@ -79,6 +79,11 @@ public class Section {
 	public boolean hasSameScheduleAs(Section sectionToBeEnlisted) {
 		return this.schedule.equals(sectionToBeEnlisted.schedule);
 	}
+	
+	@Override
+	public String toString() {
+		return "Section ID: " + sectionID;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -98,8 +103,24 @@ public class Section {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + sectionID.hashCode();
+        result = prime * result + sectionID == null ? 0 : sectionID.hashCode();
         return result;
     }
+
+	public boolean hasSameSubjectInSameSemesterAs(Section sectionToBeEnlisted) {
+		if(!hasTheSubjectAs(sectionToBeEnlisted))
+			return false;
+		if(!isInTheSameSemesterAs(sectionToBeEnlisted))
+			return false;
+		return true;
+	}
+
+	private boolean isInTheSameSemesterAs(Section sectionToBeEnlisted) {
+		return true;
+	}
+
+	private boolean hasTheSubjectAs(Section sectionToBeEnlisted) {
+		return this.subject.equals(sectionToBeEnlisted.subject);
+	}
 
 }
