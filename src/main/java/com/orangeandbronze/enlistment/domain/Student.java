@@ -25,21 +25,9 @@ public class Student {
 	public StudentSemEnlistments enlist(Section sectionToBeEnlisted) throws ConflictInSectionEnlistmentException{
 		checkIffPreviouslyEnlisted(sectionToBeEnlisted);
 		checkIfAPreviouslyEnlistedSectionIsInConflictWith(sectionToBeEnlisted);
-		checkIfAPreviouslyEnlistedSectionForTheCurrentSemesterHasTheSameSubjectAs(sectionToBeEnlisted);
 		sectionToBeEnlisted.enlist(this);
 		enlistedSections.add(sectionToBeEnlisted);
 		return new StudentSemEnlistments(this, new Semester());
-	}
-
-	private void checkIfAPreviouslyEnlistedSectionForTheCurrentSemesterHasTheSameSubjectAs(
-			Section sectionToBeEnlisted) {
-		for(Section section : enlistedSections){
-			if(section.hasSameSubjectInSameSemesterAs(sectionToBeEnlisted)){
-				throw new EnlistmentException("Section " + sectionToBeEnlisted
-						+ " has the same subject as that of one of the "
-						+ "previously enlisted sections: " + section);
-			}
-		}
 	}
 
 	private void checkIffPreviouslyEnlisted(Section section) {

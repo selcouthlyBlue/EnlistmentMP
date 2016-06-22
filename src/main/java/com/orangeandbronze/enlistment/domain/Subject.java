@@ -13,7 +13,7 @@ public class Subject {
 		this.subjectID = subjectID;
 	}
 	
-	public Subject(String subjectID, Subject[] prerequisites) {
+	public Subject(String subjectID, Subject... prerequisites) {
 		checkIfValid(subjectID);
 		checkIfAtLeastOnePrequisiteIsNullIn(prerequisites);
 		this.subjectID = subjectID;

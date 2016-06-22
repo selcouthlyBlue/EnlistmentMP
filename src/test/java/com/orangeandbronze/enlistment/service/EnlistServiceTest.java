@@ -11,6 +11,7 @@ import org.junit.Test;
 import com.orangeandbronze.enlistment.dao.SectionDAO;
 import com.orangeandbronze.enlistment.dao.StudentDAO;
 import com.orangeandbronze.enlistment.dao.StudentSemEnlistmentsDAO;
+import com.orangeandbronze.enlistment.domain.ConflictInSectionEnlistmentException;
 import com.orangeandbronze.enlistment.domain.Days;
 import com.orangeandbronze.enlistment.domain.EnlistmentException;
 import com.orangeandbronze.enlistment.domain.Period;
@@ -83,7 +84,7 @@ public class EnlistServiceTest {
 					+ "should thorw an exception if the section being enlisted "
 					+ "has the same subject as any of the previously enlisted "
 					+ "sections.");
-		} catch (EnlistmentException expected) {
+		} catch (ConflictInSectionEnlistmentException expected) {
 			
 		}
 	}

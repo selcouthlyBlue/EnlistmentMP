@@ -107,20 +107,4 @@ public class Section {
         return result;
     }
 
-	public boolean hasSameSubjectInSameSemesterAs(Section sectionToBeEnlisted) {
-		if(!hasTheSubjectAs(sectionToBeEnlisted))
-			return false;
-		if(!isInTheSameSemesterAs(sectionToBeEnlisted))
-			return false;
-		return true;
-	}
-
-	private boolean isInTheSameSemesterAs(Section sectionToBeEnlisted) {
-		return true;
-	}
-
-	private boolean hasTheSubjectAs(Section sectionToBeEnlisted) {
-		return this.subject.equals(sectionToBeEnlisted.subject);
-	}
-
 }
