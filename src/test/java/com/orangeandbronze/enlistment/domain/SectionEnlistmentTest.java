@@ -44,7 +44,7 @@ public class SectionEnlistmentTest {
 			student.enlist(section);
 			fail("enlist() method of Student class should throw an exception "
 					+ "if the section enlisted was previously enlisted.");
-		} catch (ConflictInSectionEnlistmentException expected) {
+		} catch (DuplicateSectionException expected) {
 			
 		}
 	}
@@ -52,14 +52,15 @@ public class SectionEnlistmentTest {
 	@Test
 	public void enlistingACurrentlyEnlistedSectionRaisesAnException() throws Exception {
 		student.enlist(section);
-		Section sectionWithSubjectSameAsTheOtherSection = new Section("MEH3", schedule, Room.GAB207, prereqSubjectOfML100);
+		Schedule differentSchedule = new Schedule(Days.MTH, Period.SECONDPERIOD);
+		Section sectionWithSubjectSameAsTheOtherSection = new Section("MEH3", differentSchedule, Room.GAB207, prereqSubjectOfML100);
 		try {
 			student.enlist(sectionWithSubjectSameAsTheOtherSection);
 			fail("enlist() method of Student object "
 					+ "should thorw an exception if the section being enlisted "
 					+ "has the same subject as any of the previously enlisted "
 					+ "sections.");
-		} catch (ConflictInSectionEnlistmentException expected) {
+		} catch (SameSubjectException expected) {
 			
 		}
 	}
@@ -84,7 +85,7 @@ public class SectionEnlistmentTest {
 			student.enlist(section);
 			fail("enlist() method of Section class should throw an exception "
 					+ "if the section is already full.");
-		} catch (EnlistmentException e) {
+		} catch (RoomCapacityReachedException e) {
 			
 		}
 	}

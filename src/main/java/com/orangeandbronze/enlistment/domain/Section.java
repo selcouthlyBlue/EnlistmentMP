@@ -71,18 +71,24 @@ public class Section {
 	
 	private void checkIfSectionIsFull() {
 		if(enlistedStudents.size() == Room.getCapacity(room)){
-			throw new EnlistmentException("This section "
+			throw new RoomCapacityReachedException("This section "
 					+ this + " is already full.");
 		}
 	}
-
-	public boolean hasSameScheduleAs(Section sectionToBeEnlisted) {
-		return this.schedule.equals(sectionToBeEnlisted.schedule);
-	}
 	
+	public void checkForConflictWith(Section sectionToBeEnlisted) {
+		if(this.schedule.equals(sectionToBeEnlisted.schedule)){
+			throw new ConflictInSectionEnlistmentException("Previously enlisted section " 
+					+ this + " in conflict with " + sectionToBeEnlisted);
+		}
+		if(subject.equals(sectionToBeEnlisted.subject)){
+			throw new SameSubjectException(subject.toString());
+		}
+	}
+
 	@Override
 	public String toString() {
-		return "Section ID: " + sectionID;
+		return sectionID;
 	}
 
 	@Override

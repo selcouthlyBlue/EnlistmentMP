@@ -32,17 +32,14 @@ public class Student {
 
 	private void checkIffPreviouslyEnlisted(Section section) {
 		if(enlistedSections.contains(section)){
-			throw new ConflictInSectionEnlistmentException("Section " + section 
+			throw new DuplicateSectionException("Section " + section 
 					+ " was previously enlisted.");
 		}
 	}
 
 	private void checkIfAPreviouslyEnlistedSectionIsInConflictWith(Section sectionToBeEnlisted) {
-		for(Section section : enlistedSections){
-			if(section.hasSameScheduleAs(sectionToBeEnlisted)){
-				throw new ConflictInSectionEnlistmentException("Section " + sectionToBeEnlisted
-						+ " is in conflict with " + section);
-			}
+		for(Section previouslyEnlistedSection : enlistedSections){
+			sectionToBeEnlisted.checkForConflictWith(previouslyEnlistedSection);
 		}
 	}
 
